@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="log4j-1.2.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mina-core-2.0.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-log4j12-1.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/org.json.jar!/" />
+    </SOURCES>
+  </library>
+</component>
