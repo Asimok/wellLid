@@ -101,17 +101,21 @@ public class WifiServerSocket extends Thread {
 
 		public void run() {
 			try {
+				int i=0;
 				// 死循环，无线读取8266发送过来的数据
 				while (play) {
 					byte[] msg = new byte[10];
 					in.read(msg);// 读取流数据
-					System.out.println("WiFi发过来的数据：" + Arrays.toString(msg));
+					//System.out.println("WiFi发过来的数据：" + Arrays.toString(msg)+"\n");
 					String str = new String(msg).trim();
-					System.out.println("WiFi发过来的数据转字符串  "+str);
+					i++;
+					System.out.println("WiFi发过来的数据转字符串  第"+ i +"次       "+str);
 					if(str.equals(""))
 					{
-						System.out.println("WiFi发过来的数据为空");
+
+						System.out.println("-------------------------------WiFi发过来的数据为空------------------------------");
 						play = false;
+						continue;
 
 					}
 					else if (str.contains("CONN")) {
@@ -132,10 +136,9 @@ public class WifiServerSocket extends Thread {
 
 				}
 			} catch (IOException e) {
-				play = false;
 				e.printStackTrace();
 
-			} finally {
+			}finally {
 				try {
 					in.close();
 					if (socket != null && !socket.isClosed()) {
@@ -144,7 +147,6 @@ public class WifiServerSocket extends Thread {
 					}
 
 				} catch (IOException e) {
-					play = false;
 					e.printStackTrace();
 				}
 			}
@@ -170,9 +172,9 @@ public class WifiServerSocket extends Thread {
 		}
 
 		// 这是服务器发送数据到8266的函数
-		public void send(byte[] bytes) {
+		public void send(String bytes) {
 			try {
-				out.write(bytes);
+				out.writeUTF(bytes);
 			} catch (IOException e) {
 				try {
 					// 移除集合里面的Socket

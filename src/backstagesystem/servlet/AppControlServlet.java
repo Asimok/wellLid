@@ -53,7 +53,8 @@ public class AppControlServlet extends HttpServlet {
 					new String(sessionId));
 			if (psd != null) {
 				// TODO 8266在线状态
-				psd.send(msg);
+				//psd.send(msg);
+				psd.send(data);
 				System.out.println("数据已发送到8266");
 				try {
 					JSONObject record = new JSONObject();
