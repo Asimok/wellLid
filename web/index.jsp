@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <a> 欢迎使用智能车锁</a>
+  <br/>
+  <img src="image\logo.jpg" width="480" height="720"/>
   </body>
 </html>
