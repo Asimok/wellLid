@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,7 +101,7 @@ public class WifiServerSocket extends Thread {
 		public void run() {
 			try {
 				int i=0;
-				// 死循环，无线读取8266发送过来的数据
+                // 死循环，无线读取车锁 3G 端发送过来的数据
 				while (play) {
 					byte[] msg = new byte[10];
 					in.read(msg);// 读取流数据
@@ -113,17 +112,15 @@ public class WifiServerSocket extends Thread {
 					if(str.equals(""))
 					{
 
-						System.out.println("-------------------------------WiFi发过来的数据为空------------------------------");
+                        System.out.println("////////////////////-----WiFi发过来的数据为空-----/////////////////");
 						play = false;
 						continue;
 
-					}
-					else if (str.contains("CONN")) {
+					} else if (str.contains("CONN_9527")) {
 						mStrName = str.trim();
 						/*
 						 * 判断发过的是CONN_9527,那么就将此socket对象添加到这个类的静态集合里面，以CONN_9527为索引。
-						 *  很多人这里可能不太懂，APP与服务端的通信在AppControlServlet类中触发，想要实现APP与8266通信，只能将这个socket对象通过类的静态变量暴露出去。
-						 * 等到AppControlServlet收到APP的信息，就立马通过CONN_9527作为索引取出socket，和8266进行通讯
+                         * 等到AppControlServlet收到APP的信息，就立马通过CONN_9527作为索引取出socket，和车锁3G端进行通讯
 						 */
 						WifiServerSocket.socketMap.put(mStrName, this);
 
@@ -158,16 +155,16 @@ public class WifiServerSocket extends Thread {
 		 * @param msg
 		 */
 		private void sendToAPP(String strName, byte[] msg) {
-			System.out.println("进入给APP发送数据sessionId this:" + strName);
-			System.out.println("转发数据: " + new String(msg));
+            //System.out.println("进入给APP发送数据sessionId this:" + strName);
+            System.out.println("给控制端APP转发数据: " + new String(msg).trim());
 
 			if (AppServiceSocket.getAcceptorSessions().get(strName) != null) {
 				AppServiceSocket.getAcceptorSessions().get(strName).write(new String(msg));
 
-				System.out.println("已发送给客户端");
+                System.out.println("已发送给控制端APP");
 
 		} else {
-				System.out.println("客户端没上线");
+                System.out.println("控制端APP没上线");
 			}
 		}
 
@@ -188,7 +185,7 @@ public class WifiServerSocket extends Thread {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				System.out.println("该客户端已退出！");
+                System.out.println("控制端APP已退出！");
 			}
 		}
 
