@@ -8,7 +8,7 @@
         <description>This is the description of my J2EE component</description>
         <display-name>This is the display name of my J2EE component</display-name>
         <servlet-name>AppControlServlet</servlet-name>
-        <servlet-class>backstagesystem.servlet.AppControlServlet</servlet-class>
+        <servlet-class>smartlockserver.servlet.AppControlServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -25,12 +25,12 @@
 
     <listener>
         <description>WifiServerSocket 服务随 web 启动而启动</description>
-        <listener-class>backstagesystem.service.WifiServerSocketListener</listener-class>
+        <listener-class>smartlockserver.service.WifiServerSocketListener</listener-class>
     </listener>
 
     <listener>
         <description>AppServerSocket 服务随 web 启动而启动</description>
-        <listener-class>backstagesystem.service.AppServerSocketListener</listener-class>
+        <listener-class>smartlockserver.service.AppServerSocketListener</listener-class>
     </listener>
 
 </web-app>

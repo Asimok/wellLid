@@ -1,4 +1,4 @@
-package backstagesystem.servlet;
+package smartlockserver.servlet;
 
 
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import backstagesystem.service.WifiServerSocket;
+import smartlockserver.service.WifiServerSocket;
 
 
 public class AppControlServlet extends HttpServlet {
@@ -58,7 +58,7 @@ public class AppControlServlet extends HttpServlet {
 				//转发数据给 车锁 3G端
 				//psd.send(msg);
 				psd.send(code);
-				System.out.println("数据已发送到 车锁 3G端");
+				System.out.println("转发数据给 车锁 3G端");
 				try {
 					JSONObject record = new JSONObject();
 					record.put("username", username);

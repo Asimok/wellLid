@@ -11,7 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  <a> 欢迎使用智能车锁</a>
+  <a aria-setsize="50px"> 欢迎使用智能车锁</a>
+  <br/>
   <br/>
   <img src="image\logo.jpg" width="480" height="720"/>
   </body>

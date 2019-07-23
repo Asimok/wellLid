@@ -1,4 +1,4 @@
-package backstagesystem.service;
+package smartlockserver.service;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -185,7 +185,7 @@ public class WifiServerSocket extends Thread {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-                System.out.println("控制端APP已退出！");
+                System.out.println("车锁3G端 已退出！");
 			}
 		}
 
