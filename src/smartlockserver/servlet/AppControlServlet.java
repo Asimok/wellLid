@@ -83,8 +83,7 @@ public class AppControlServlet extends HttpServlet {
 					jObject.put("resultCode", 202);
 					jObject.put("totalNum", 0);
 					jObject.put("data", record);
-				} catch (JSONException e) {
-					e.printStackTrace();
+				} catch (JSONException e) {					e.printStackTrace();
 				}
 			}
 

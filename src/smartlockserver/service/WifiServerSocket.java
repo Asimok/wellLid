@@ -103,16 +103,16 @@ public class WifiServerSocket extends Thread {
 				int i=0;
                 // 死循环，无线读取车锁 3G 端发送过来的数据
 				while (play) {
-					byte[] msg = new byte[10];
+					byte[] msg = new byte[128];
 					in.read(msg);// 读取流数据
-					//System.out.println("WiFi发过来的数据：" + Arrays.toString(msg)+"\n");
+					//System.out.println("车锁 安卓 发过来的数据：" + Arrays.toString(msg)+"\n");
 					String str = new String(msg).trim();
 					i++;
-					System.out.println("WiFi发过来的数据转字符串  第"+ i +"次       "+str);
+					System.out.println("车锁 安卓 发过来的数据转字符串  第"+ i +"次       "+str);
 					if(str.equals(""))
 					{
 
-                        System.out.println("////////////////////-----WiFi发过来的数据为空-----/////////////////");
+                        System.out.println("////////////////////-----车锁 安卓 发过来的数据为空-----/////////////////");
 						play = false;
 						continue;
 
@@ -168,7 +168,7 @@ public class WifiServerSocket extends Thread {
 			}
 		}
 
-		// 这是服务器发送数据到8266的函数
+		// 这是服务器发送数据到 3G端 的函数
 		public void send(String bytes) {
 			try {
 				out.writeUTF(bytes);
