@@ -1,4 +1,4 @@
-package smartlockserver.service;
+package wellLid.service;
 
 import java.net.InetSocketAddress;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+
 
 /**
  * APP移动端与服务器端的长连接
@@ -51,32 +52,39 @@ public class AppServiceSocket extends Thread {
 
 	private static class DemoServerHandler extends IoHandlerAdapter {
 
+
+
 		@Override
 		public void sessionCreated(IoSession session) throws Exception {
 			// TODO 服务器与客户端创建连接
-			// System.out.println("服务器与客户端创建连接...");
+			 System.out.println("服务器与客户端创建连接...");
+			System.out.println(session);
 			super.sessionCreated(session);
 		}
 
 		@Override
 		public void sessionOpened(IoSession session) throws Exception {
 			// TODO 服务器与客户端连接打开
-			// System.out.println("服务器与客户端连接打开...");
+
+			 System.out.println("服务器与客户端连接打开...");
+			System.out.println(session);
 			super.sessionOpened(session);
+
 		}
 
 		// TODO 消息的接收处理
 		@Override
 		public void messageReceived(IoSession session, Object message)
 				throws Exception {
+
+
 			super.messageReceived(session, message);
 
 			String str = message.toString().trim();
-
+			System.out.println(str);
 			IoSessionMap.put(str, session);
-
-			System.out.println("客户端发送的数据:" + str);
 			acceptor.getManagedSessions().get(session.getId()).write("连接服务器成功");
+			System.out.println("反馈 连接服务器成功");
 		}
 
 		@Override

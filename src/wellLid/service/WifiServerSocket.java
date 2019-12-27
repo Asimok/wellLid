@@ -1,4 +1,4 @@
-package smartlockserver.service;
+package wellLid.service;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.websocket.Session;
 
 /**
  * 硬件端与服务器端的长连接
@@ -105,14 +106,18 @@ public class WifiServerSocket extends Thread {
 				while (play) {
 					byte[] msg = new byte[128];
 					in.read(msg);// 读取流数据
-					//System.out.println("车锁 安卓 发过来的数据：" + Arrays.toString(msg)+"\n");
+					//System.out.println("ESP8266端 发过来的数据：" + Arrays.toString(msg)+"\n");
 					String str = new String(msg).trim();
 					i++;
-					System.out.println("车锁 安卓 发过来的数据转字符串  第"+ i +"次       "+str);
+					System.out.println("ESP8266端 发过来的数据转字符串  第"+ i +"次       "+str);
+
+
+					//sendmsg.start((Session) AppServiceSocket.getAcceptorSessions().get(mStrName));
+					//sendmsg.sendAll(str);
 					if(str.equals(""))
 					{
 
-                        System.out.println("////////////////////-----车锁 安卓 发过来的数据为空-----/////////////////");
+                        System.out.println("////////////////////-----ESP8266端 发过来的数据为空-----/////////////////");
 						play = false;
 						continue;
 
@@ -120,14 +125,14 @@ public class WifiServerSocket extends Thread {
 						mStrName = str.trim();
 						/*
 						 * 判断发过的是CONN_9527,那么就将此socket对象添加到这个类的静态集合里面，以CONN_9527为索引。
-                         * 等到AppControlServlet收到APP的信息，就立马通过CONN_9527作为索引取出socket，和车锁3G端进行通讯
+                         * 等到AppControlServlet收到APP的信息，就立马通过CONN_9527作为索引取出socket，和客户端进行通讯
 						 */
 						WifiServerSocket.socketMap.put(mStrName, this);
 
 					} else {
 						if(mStrName!=null)
 						{
-							sendToAPP(mStrName, msg);
+							sendToAPP("CONN_9527", msg);
 						}
 					}
 
@@ -156,19 +161,19 @@ public class WifiServerSocket extends Thread {
 		 */
 		private void sendToAPP(String strName, byte[] msg) {
             //System.out.println("进入给APP发送数据sessionId this:" + strName);
-            System.out.println("给控制端APP转发数据: " + new String(msg).trim());
+
 
 			if (AppServiceSocket.getAcceptorSessions().get(strName) != null) {
 				AppServiceSocket.getAcceptorSessions().get(strName).write(new String(msg));
 
-                System.out.println("已发送给控制端APP");
+				System.out.println("给客户端转发数据: " + new String(msg).trim());
 
 		} else {
-                System.out.println("控制端APP没上线");
+                System.out.println("客户端没上线");
 			}
 		}
 
-		// 这是服务器发送数据到 3G端 的函数
+		// 这是服务器发送数据到 ESP8266端 的函数
 		public void send(String bytes) {
 			try {
 				out.writeUTF(bytes);
@@ -185,7 +190,7 @@ public class WifiServerSocket extends Thread {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-                System.out.println("车锁3G端 已退出！");
+                System.out.println("客户端 已退出！");
 			}
 		}
 

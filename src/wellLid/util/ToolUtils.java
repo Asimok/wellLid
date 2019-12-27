@@ -1,4 +1,4 @@
-package smartlockserver.util;
+package wellLid.util;
 
 public class ToolUtils {
 	public static byte[] stringToByte(String str) {

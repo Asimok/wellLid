@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SmartLockServer.iml" filepath="$PROJECT_DIR$/SmartLockServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wellLid.iml" filepath="$PROJECT_DIR$/wellLid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/welllid/welllid.iml" filepath="$PROJECT_DIR$/welllid/welllid.iml" />
     </modules>
   </component>
 </project>

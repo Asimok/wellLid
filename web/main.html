@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Client</title>
+</head>
+<body>
+<script type="text/javascript">
+    var socket;
+    if (window.WebSocket) {
+
+        socket = new WebSocket("ws://192.168.31.114:10011");
+        //socket.send("CONN_9527");
+
+        socket.onmessage = function(event) {
+            if(typeof(event.data)=="string"){
+                var ta = document.getElementById('responseText');
+                ta.value = ta.value +'\n'+ event.data
+            }else{
+                var reader = new FileReader();
+                reader.onload = function(event){
+                    if(event.target.readyState == FileReader.DONE){
+                        var url = event.target.result;
+                    }
+                    document.getElementById('responseText').src=url
+                }
+            }
+            //ta.value=event;
+        };
+        socket.onopen = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = "contact start";
+        };
+        socket.onclose = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = ta.value + "contact close";
+        };
+    } else {
+        alert("browse not support WebSocket！");
+    }
+
+    function send(message) {
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.send(message);
+            var buffer = new ArrayBuffer(128);
+            socket.send(buffer);
+
+            var intview = new Uint32Array(buffer);
+            socket.send(intview);
+
+            var blob = new Blob([buffer]);
+            socket.send(blob);
+        } else {
+            alert("contact not start");
+        }
+    }
+    function Close(){
+        socket.close();
+    }
+
+
+    function down(){
+        String
+        var data;
+        data = "username=mq"+"&sessionId=CONN_9527"  + "&code=1" ;
+
+        var url = "http://192.168.31.114:8080/wellLid/servlet/AppControlServlet?username=mq&sessionId=CONN_9527&code=bbbbb"
+        var request = new XMLHttpRequest();
+        request.open("POST", url);
+        request.send(data);
+        alert("hello");
+
+    }
+</script>
+<form onsubmit="return false;">
+    <h3>My WebSocket Client</h3>
+    <textarea id="responseText" style="width: 500px; height: 300px;"></textarea>
+    <br>
+    <input type="text" name="message"  style="width: 300px" value="I am client">
+    <input type="button" value="send" onclick="send(this.form.message.value)">
+    <input type="button" value="close" onclick="Close()">
+    <input type="button" value="conn" onclick="down()">
+    <input type="button" onclick="javascript:document.getElementById('responseText').value=''" value="clear">
+</form>
+<br>
+<br>
+</body>
+</html>
+

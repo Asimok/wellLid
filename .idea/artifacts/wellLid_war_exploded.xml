@@ -1,17 +1,17 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="SmartLockServer:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/SmartLockServer_war_exploded</output-path>
+  <artifact type="exploded-war" name="wellLid:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/wellLid_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="SmartLockServer" />
+          <element id="module-output" name="wellLid" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="log4j-1.2.12" />
           <element id="library" level="project" name="log4j-1.2.12 (2)" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="SmartLockServer/web/Web" />
+      <element id="javaee-facet-resources" facet="wellLid/web/Web" />
     </root>
   </artifact>
 </component>

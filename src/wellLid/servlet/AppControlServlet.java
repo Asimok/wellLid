@@ -1,4 +1,4 @@
-package smartlockserver.servlet;
+package wellLid.servlet;
 
 
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import smartlockserver.service.WifiServerSocket;
+import wellLid.service.WifiServerSocket;
 
 
 public class AppControlServlet extends HttpServlet {
@@ -45,7 +45,7 @@ public class AppControlServlet extends HttpServlet {
 
 		if (sessionId != null) {
 			// TODO 将获取的数据打印出来
-			System.out.println("--------------------------车锁 安卓端 传来的数据--------------------------");
+			System.out.println("--------------------------ESP8266端端 传来的数据--------------------------");
 			System.out.println("username:" + username);
 			System.out.println("sessionId:" + sessionId);
 			System.out.println("code:" + code);
@@ -54,11 +54,11 @@ public class AppControlServlet extends HttpServlet {
 			// 这里的sessionId是CONN_9527，通过这个索引取出相对应的socket对象，然后将APP发送过来的数据，再发送到8266
 			WifiServerSocket.ProcessSocketData psd = WifiServerSocket.getSocketMap().get(new String(sessionId));
 			if (psd != null) {
-				// TODO 车锁 3G端 在线状态
-				//转发数据给 车锁 3G端
+				// TODO 车锁 ESP8266端 在线状态
+				//转发数据给 车锁 ESP8266端
 				//psd.send(msg);
 				psd.send(code);
-				System.out.println("转发数据给 车锁 3G端");
+				System.out.println("转发数据给 车锁 ESP8266端");
 				try {
 					JSONObject record = new JSONObject();
 					record.put("username", username);
@@ -73,8 +73,8 @@ public class AppControlServlet extends HttpServlet {
 				}
 
 			} else {
-				// TODO 车锁 3G端 离线状态
-				System.out.println("socket连接为空，车锁 3G端 未连接服务器");
+				// TODO 车锁 ESP8266端 离线状态
+				System.out.println("socket连接为空，车锁 ESP8266端 未连接服务器");
 				try {
 					JSONObject record = new JSONObject();
 					record.put("username", username);
