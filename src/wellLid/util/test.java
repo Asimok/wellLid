@@ -7,7 +7,7 @@ import java.net.Socket;
 public class test {
     public static  void  main(String[] args) throws IOException {
 //        System.out.println("测试客户端");
-//        Socket client = new Socket("192.168.31.114", 10086);
+//        Socket client = new Socket("192.168.0.110", 10086);
 //        //获得输入输出流
 //
 //        PrintWriter os = new PrintWriter(client.getOutputStream());

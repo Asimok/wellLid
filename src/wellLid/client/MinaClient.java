@@ -1,5 +1,8 @@
 package wellLid.client;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.InetSocketAddress;
 
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
@@ -11,18 +14,24 @@ import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import wellLid.service.AppServiceSocket;
 
 
 /**
  * Mina客户端
- * @author 黄宝康
- * 2017年9月30日 下午2:09:58
  */
-public class MinaClient {
+public class MinaClient  {
 
-   // public static void main(String[] args) {
-   public  void startmina() {
+    public static void main(String[] args) {
+
+
+        MinaClientHandler mimnListener= new MinaClientHandler();
         // 创建TCP/IP连接
         NioSocketConnector connection = new NioSocketConnector();
 
@@ -30,9 +39,7 @@ public class MinaClient {
         DefaultIoFilterChainBuilder chain = connection.getFilterChain();
 
         // 往过滤器链的最后加入一个一行一行读取数据的过滤器
-        //chain.addLast("mychin", new ProtocolCodecFilter(new TextLineCodecFactory()));
         // 添加日志过滤器
-
 
         connection.getSessionConfig().setReadBufferSize(1024*1024);//发送缓冲区1M
 
@@ -41,13 +48,13 @@ public class MinaClient {
         chain.addLast("logging", new LoggingFilter());
         chain.addLast("codec", new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
         // 客户端消息处理器
-        connection.setHandler(new MinaClientHandler());
+        connection.setHandler(mimnListener);
 
         // 设置超时时间
         connection.setConnectTimeout(10000);
 
         // 连接到服务器
-        ConnectFuture cf = connection.connect(new InetSocketAddress("192.168.31.114", 10011));
+        ConnectFuture cf = connection.connect(new InetSocketAddress("192.168.0.110", 10011));
 
         // 等待连接完成
         cf.awaitUninterruptibly();
@@ -57,5 +64,6 @@ public class MinaClient {
         connection.dispose();
 
     }
+
 
 }

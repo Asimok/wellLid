@@ -51,7 +51,7 @@ public class Client {
         BufferedWriter writer = null;
         BufferedReader reader2;
         try {
-            socket = new Socket("192.168.31.114", 10086);
+            socket = new Socket("192.168.0.110", 10086);
             reader = new BufferedReader(new InputStreamReader(System.in));
             reader2 = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));

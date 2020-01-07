@@ -7,16 +7,17 @@ import java.io.IOException;
 
 /**
  * 客户端业务处理逻辑
- * 
- * @author 黄宝康 2017年9月30日 下午2:48:24
+ *
  */
 public class MinaClientHandler extends IoHandlerAdapter {
-
+    mainInterface min;
     // 当客户端连接进入时
     @Override
     public void sessionOpened(IoSession session) throws Exception {
         System.out.println("incomming 客户端: " + session.getRemoteAddress());
         session.write("CONN_9527");
+         min=new mainInterface();
+        min.mainFace();
     }
 
     @Override
@@ -30,8 +31,10 @@ public class MinaClientHandler extends IoHandlerAdapter {
     public void messageReceived(IoSession session, Object message) throws Exception {
         super.messageReceived(session, message);
         String str = message.toString().trim();
-        System.out.println("接受到服务器数据 "+str);
-
+        //System.out.println("接受到服务器数据 "+str);
+        min. setValue(str);
+        Thread mThread1=new Thread(min,"线程1");
+        mThread1.start();
 
     }
 
@@ -45,5 +48,7 @@ public class MinaClientHandler extends IoHandlerAdapter {
         System.out.println("one Client Connection" + session.getRemoteAddress());
       //  session.write("我来了······");
     }
+
+
 
 }

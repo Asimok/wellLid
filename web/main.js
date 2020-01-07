@@ -46,7 +46,7 @@ function down(){
     var data;
     data = "username=mq"+"&sessionId=CNNO9527"  + "&code=1" ;
 
-    var url = "http://192.168.31.114:8080/wellLid/servlet/AppControlServlet?username=mq&sessionId=CONN_9527&code=bbbbb"
+    var url = "http://192.168.0.110:8080/wellLid/servlet/AppControlServlet?username=mq&sessionId=CONN_9527&code=bbbbb"
     var request = new XMLHttpRequest();
     request.open("POST", url);
     request.send(data);

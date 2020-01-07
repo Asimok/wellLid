@@ -16,8 +16,8 @@ public class MinaStartListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent e) {
 		
 
-			minastart = new MinaClient();
-			minastart.startmina();
+//			minastart = new MinaClient();
+//			minastart.startmina();
 
 
 	}

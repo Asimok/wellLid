@@ -22,10 +22,6 @@
     <orderEntry type="library" name="javax.annotation" level="project" />
     <orderEntry type="library" name="log4j-1.2.12" level="project" />
     <orderEntry type="library" name="log4j-1.2.12 (2)" level="project" />
-    <orderEntry type="library" name="tomcat-juli" level="project" />
-    <orderEntry type="library" name="websocket" level="project" />
-    <orderEntry type="library" name="tomcat-coyote-7.0.90" level="project" />
-    <orderEntry type="library" name="websocket (2)" level="project" />
-    <orderEntry type="library" name="tomcatlib" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
